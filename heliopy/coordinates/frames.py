@@ -16,6 +16,18 @@ class HeliocentricEarthEcliptic(baseframe.BaseCoordinateFrame):
     The x-y plane is the Earth mean ecliptic, the x-axis points from the
     Sun to the Earth, and the z-axis points North out of the ecliptic plane.
     """
-    name = 'heliocentric_earth_ecliptic'
+    name = 'HEE'
+    default_representation = coords.CartesianRepresentation
+    obstime = coords.TimeAttribute(default=None)
+
+
+class GeocentricSolarEcliptic(baseframe.BaseCoordinateFrame):
+    """
+    A coordinate frame in the Geocentric Solar Ecliptic (GSE) system.
+
+    The x-y plane is the Earth mean ecliptic, the x-axis points from the
+    Earth to the Sun, and the z-axis points North out of the ecliptic plane.
+    """
+    name = 'GSE'
     default_representation = coords.CartesianRepresentation
     obstime = coords.TimeAttribute(default=None)

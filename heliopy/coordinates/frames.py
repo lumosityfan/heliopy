@@ -2,7 +2,7 @@
 Common space physics coordinate systems.
 
 This submodule contains various space physics coordinate frames for use with
-the `astropy.coordinates` module.
+the :mod:`astropy.coordinates` module.
 """
 import astropy.coordinates.baseframe as baseframe
 import astropy.coordinates.representation as r

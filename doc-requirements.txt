@@ -1,8 +1,10 @@
+astropy
+sunpy
 matplotlib
-sphinx-gallery
-sphinx
-sphinx-bootstrap-theme
 numpy
-pillow
 pandas
+pillow
+sphinx
 sphinx-automodapi
+sphinx-bootstrap-theme
+sphinx-gallery

@@ -36,6 +36,7 @@ setup(name='HelioPy',
                 'pycdf.toolbox',
                 'pycdf.pycdf',
                 'heliopy',
+                'heliopy.coordinates',
                 'heliopy.data',
                 'heliopy.util'],
       package_data={'heliopy': ['heliopyrc']})

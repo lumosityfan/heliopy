@@ -11,25 +11,32 @@ This module contains functions for converting one
   :meth:`~astropy.coordinates.BaseCoordinateFrame.transform_to` on coordinate
   frame objects.
 """
-import astropy.coordinates.baseframe as baseframe
-import astropy.coordinates.transformations as transformations
+import sunpy.coordinates.ephemeris as ephem
+import astropy.coordinates as coords
+import astropy.units as u
 import astropy.coordinates.builtin_frames as astropy_frames
 import numpy as np
 
 import heliopy.coordinates.frames as helio_frames
 
 
-@baseframe.frame_transform_graph.transform(
-    transformations.StaticMatrixTransform,
+@coords.frame_transform_graph.transform(
+    coords.AffineTransform,
     helio_frames.HeliocentricEarthEcliptic,
     helio_frames.GeocentricSolarEcliptic)
-def hee_to_gse():
+def hee_to_gse(hee_coord, gse_frame):
     '''
     Convert from HEE to GSE coordinates.
     '''
-    return np.array([[-1, 0, 0],
-                     [0, -1, 0],
-                     [0, 0, 1]])
+    obstime = hee_coord.obstime
+    r_earth_sun = ephem.get_sunearth_distance(time=obstime)
+    # Rotate 180deg around the z-axis
+    R = np.array([[-1, 0, 0],
+                  [0, -1, 0],
+                  [0, 0, 1]])
+    # Offset so centre is at Earth
+    offset = coords.CartesianRepresentation(r_earth_sun, 0*u.m, 0*u.m)
+    return R, offset
 
 
 __doc__ += astropy_frames._make_transform_graph_docs()
